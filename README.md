@@ -3,36 +3,71 @@ Role Name
 
 A brief description of the role goes here.
 
-Requirements
-------------
+## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+There are no special requirements to this role
 
-Role Variables
---------------
+## Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Variables that can be customised in this role are documented in `defaults/main.yml`
 
-Dependencies
-------------
+## Dependences
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role has no other dependencies
 
-Example Playbook
-----------------
+## Installation
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+### Ansible Galaxy (recommended)
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```bash
+$ cd path/to/playbook/root
+$ cat >> requirements.yaml <<EOF
+- src: "https://github.com/sitewards/ansible-role-fluentbit.git"
+  version: "master" # <----- Update this to a stable version
+  name: "sitewards.fluentbit"
+EOF
+$ ansible-galaxy install -r requirements.yaml
+```
 
-License
--------
+### Git Submodules
 
-BSD
+```
+$ cd path/to/playbook/root
+$ mkdir roles/
+$ git submodule add https://github.com/sitewards/ansible-role-fluentbit.git sitewards.fluentbit
+```
 
-Author Information
-------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+## Usage
+
+Include this in another ansible playbook. For sample, consider a generic server playbook:
+
+```
+---
+# $PLAYBOOK_ROOT/server.yaml
+- name: "server"
+  hosts: all
+  become: true
+  become_user: "root"
+```
+
+Add the reference for the role:
+
+```
+# $PLAYBOOK_ROOT/server.yaml
+# ...
+become_user: "root"
+roles
+  - "sitewards.fluentbit"
+```
+
+This should work!
+
+## License
+
+OSL-3.0
+
+## Author Information
+
+- Behrouz Abbasi
+- Andrew Howden
