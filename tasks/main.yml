@@ -1,2 +1,28 @@
 ---
-# tasks file for .
+- name: "Add an Apt signing key For Fluentbit"
+  apt_key:
+    url: "https://packages.fluentbit.io/fluentbit.key"
+    id: "F209D8762A60CD49E680633B4FF8368B6EA0722A"
+    state: "present"
+
+- name: "Check that HTTPS transport is available to APT"
+  apt:
+    name: "apt-transport-https"
+    state: "present"
+    update_cache: "yes"
+
+- name: "Ensure the package repository is up to date"
+  apt_repository:
+    repo: "deb https://packages.fluentbit.io/ubuntu/{{ ansible_distribution_release }} {{ ansible_distribution_release }} main"
+    state: "present"
+
+- name: "Update repositories cache and install td-agent-bit"
+  apt:
+    name: "td-agent-bit"
+    update_cache: "yes"
+
+- name: "Start service td-agent-bit, if not running"
+  service:
+    name: "td-agent-bit"
+    state: "started"
+    enabled: "yes"
