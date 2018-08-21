@@ -8,6 +8,7 @@
   apt:
     name: "apt-transport-https"
     state: "present"
+    update_cache: "yes"
 
 - name: "Ensure the package repository is up to date"
   apt_repository:
