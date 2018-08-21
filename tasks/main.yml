@@ -2,12 +2,17 @@
 - name: "Add an Apt signing key For Fluentbit"
   apt_key:
     url: "https://packages.fluentbit.io/fluentbit.key"
-    state: present
+    state: "present"
 
-- name: "Add the Fluentbit repository into sources list"
+- name: "Check that HTTPS transport is available to APT"
+  apt:
+    name: "apt-transport-https"
+    state: "present"
+
+- name: "Ensure the package repository is up to date"
   apt_repository:
-    repo: "deb https://packages.fluentbit.io/ubuntu/xenial xenial main"
-    state: present
+    repo: "deb https://packages.fluentbit.io/ubuntu/{{ ansible_distribution_release }} {{ ansible_distribution_release }} main"
+    state: "present"
 
 - name: "Update repositories cache and install td-agent-bit"
   apt:
@@ -17,4 +22,5 @@
 - name: "Start service td-agent-bit, if not running"
   service:
     name: "td-agent-bit"
-    state: started
+    state: "started"
+    enabled: "yes"
