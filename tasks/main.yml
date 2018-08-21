@@ -2,6 +2,7 @@
 - name: "Add an Apt signing key For Fluentbit"
   apt_key:
     url: "https://packages.fluentbit.io/fluentbit.key"
+    id: "F209D8762A60CD49E680633B4FF8368B6EA0722A"
     state: "present"
 
 - name: "Check that HTTPS transport is available to APT"
