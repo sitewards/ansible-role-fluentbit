@@ -1,0 +1,36 @@
+{% if sitewards__fluentbit__config_service_params is defined %}
+[SERVICE]
+{% for service_key in sitewards__fluentbit__config_service_params %}
+    {{ service_key }}  {{ sitewards__fluentbit__config_service_params[service_key] }}
+{% endfor %}
+{% endif %}
+
+{% if sitewards__fluentbit__inputs is defined %}
+{% for input in sitewards__fluentbit__inputs %}
+[INPUT]
+{% for input_key in input %}
+    {{ input_key }}  {{ input[input_key] }}
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+
+{% if sitewards__fluentbit__filters is defined %}
+{% for filter in sitewards__fluentbit__filters %}
+[FILTER]
+{% for filter_key in filter %}
+    {{ filter_key }}  {{ filter[filter_key] }}
+{% endfor %}
+
+{% endfor %}
+{% endif %}
+
+{% if sitewards__fluentbit__outputs is defined %}
+{% for output in sitewards__fluentbit__outputs %}
+[OUTPUT]
+{% for output_key in output %}
+    {{ output_key }}  {{ output[output_key] }}
+{% endfor %}
+
+{% endfor %}
+{% endif %}

@@ -1,2 +1,5 @@
 ---
-# defaults file for .
+sitewards__fluentbit__config_service_params: {}
+sitewards__fluentbit__inputs: []
+sitewards__fluentbit__filters: []
+sitewards__fluentbit__outputs: []

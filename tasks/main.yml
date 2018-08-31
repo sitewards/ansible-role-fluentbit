@@ -21,6 +21,11 @@
     name: "td-agent-bit"
     update_cache: "yes"
 
+- name: "Make and copy the configuration file"
+    template:
+      src: "etc/td-agent-bit/td-agent-bit.conf.j2"
+      dest: "/etc/td-agent-bit/td-agent-bit.conf"
+
 - name: "Start service td-agent-bit, if not running"
   service:
     name: "td-agent-bit"
