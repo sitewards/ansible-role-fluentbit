@@ -25,6 +25,7 @@
   template:
     src: "etc/td-agent-bit/td-agent-bit.conf.j2"
     dest: "/etc/td-agent-bit/td-agent-bit.conf"
+  notify: "reload td-agent"
 
 - name: "Start service td-agent-bit, if not running"
   service:

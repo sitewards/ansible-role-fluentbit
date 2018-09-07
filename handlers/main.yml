@@ -1,2 +1,5 @@
 ---
-# handlers file for .
+- name: "reload td-agent"
+  service:
+    name: "td-agent-bit"
+    state: "restarted"
