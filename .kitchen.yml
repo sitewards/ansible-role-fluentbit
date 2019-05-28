@@ -7,7 +7,7 @@ provisioner:
   name: ansible_playbook
   ansible_connection: ssh
   require_chef_for_busser: false
-  require_ruby_for_busser: true
+  require_ruby_for_busser: false
   ansible_host_key_checking: false
   ansible_verbosity: 2
   ansible_verbose: true
