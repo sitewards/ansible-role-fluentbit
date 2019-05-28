@@ -1,0 +1,8 @@
+{% if item.content is defined %}
+{% for parser in item.content %}
+[PARSER]
+{% for parser_key in parser %}
+    {{ parser_key }}  {{ parser[parser_key] }}
+{% endfor %}
+{% endfor %}
+{% endif %}

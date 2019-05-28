@@ -17,3 +17,5 @@ sitewards__fluentbit__filters: []
 sitewards__fluentbit__outputs:
   - "Name": "stdout"
     "Match": "*"
+
+sitewards__fluentbit__additional_parsers: []

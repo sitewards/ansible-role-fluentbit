@@ -27,6 +27,14 @@
     dest: "/etc/td-agent-bit/td-agent-bit.conf"
   notify: "reload td-agent"
 
+- name: "Make and copy the additional parsers file"
+  template:
+    src: "etc/td-agent-bit/additional_parser.j2"
+    dest: "/etc/td-agent-bit/{{ item.name }}.conf"
+  with_items: '{{ sitewards__fluentbit__additional_parsers }}'
+  when: sitewards__fluentbit__additional_parsers | length >0
+  notify: "reload td-agent"
+
 - name: "Start service td-agent-bit, if not running"
   service:
     name: "td-agent-bit"

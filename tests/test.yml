@@ -1,4 +1,22 @@
 ---
 - hosts: all
-  roles:
-    - role_under_test
+  tasks:
+  - name: Install Fluenbit
+    include_role:
+      name: ansible-role-fluentbit
+    vars:
+      sitewards__fluentbit__inputs:
+        - "Name": syslog
+          "Parser": syslog-rfc3164
+          "Listen": 127.0.0.1
+          "Port": 5140
+          "Mode": tcp
+      sitewards__fluentbit__additional_parsers:
+        - name: syslog-clickhouse
+          content:
+            - "Name": syslog-clickhouse
+              "Format": regex
+              "Regex": '/^\<(?<pri>[0-9]+)\>1 (?<time>[^ ]+) (?<host>[^ ]+) (?<ident>[a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?(?:[^\:]*\:)? *(?<message>.*)$/'
+              "Time_Key": time
+              "Time_Format": '%Y-%m-%dT%H:%M:%S.%LZ'
+              "Time_Keep": On
